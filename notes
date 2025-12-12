@@ -13,3 +13,23 @@ GNC – Guided Neural Cognition
 GNC – General Networked Computing
 GNC – Global Next-gen Computing
 GNC – Generative Network Corporation
+
+ASA: chat gpt history doboslevente.dl
+-alapconfig
+-vlank
+-nat(ha kell)
+-az asa a default gateway
+-hsrp a routeren marad az outside ip cimmel a 2 router és a 2 asa 1 ip tartományba.
+
+Változtatások:
+-minden épületnél legyen ASA
+-a camerák kiszedése csak a szervernél lesz
+-ip ujraosztás
+
+csinálni kell:
+-acl logika kitalálása
+-config
+-internet routerek configja
+-megnézni minden megvan e(kkk)
+-ipv6 kitalálás
+-nat
