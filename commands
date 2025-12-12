@@ -1,9 +1,46 @@
 Tokyo_F1_R
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
 
 Tokyo_F2_R
 ====================
-
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
 Tokyo_F1_ASA
 ====================
 
@@ -12,90 +49,932 @@ Tokyo_F2_ASA
 
 Tokyo_F1_MSW
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
+interface range f0/...
+switchport mode trunk
+sw t a v ...
+switchport trunk native vlan ...
+channel-group ... mode ...
+no sh
 
 Tokyo_F2_MSW
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
+interface range f0/...
+switchport mode trunk
+sw t a v ...
+switchport trunk native vlan ...
+channel-group ... mode ...
+no sh
+interface range FastEthernet0/...
+channel-group ... mode auto
+no shutdown
+interface port-channel ...
+switchport mode trunk
+sw t a v ...
+switchport trunk native vlan ...
 
 Tokyo_F1_SW1
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Tokyo_F1_SW2
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Tokyo_F1_SW3
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Tokyo_F1_SW4
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Tokyo_F2_SW1
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
+interface range FastEthernet0/...
+channel-group ... mode desirable
+no shutdown
+interface port-channel ...
+switchport mode trunk
+sw t a v ...
+switchport trunk native vlan ...
 
 Tokyo_F2_SW2
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Tokyo_Internet
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+int loopback 1
+description Tokyo_Internet
+ip address 200.200.0.1 255.255.255.0
 
 Nagoya_F1_R
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
 
 Nagoya_F2_R
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
 
 Nagoya_F1_MSW
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
+interface range f0/...
+switchport mode trunk
+sw t a v ...
+switchport trunk native vlan ...
+channel-group ... mode ...
+no sh
 
 Nagoya_F2_MSW
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
+interface range f0/...
+switchport mode trunk
+sw t a v ...
+switchport trunk native vlan ...
+channel-group ... mode ...
+no sh
 
 Nagoya_F1_SW1
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Nagoya_F1_SW2
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Nagoya_F1_SW3
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Nagoya_F2_SW1
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Nagoya_F2_SW2
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Nagoya_F2_SW3
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Nagoya_Internet
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+int loopback 2
+description Nagoya_Internet
+ip address 200.200.1.1 255.255.255.0
 
 Osaka_F1_R
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
 
 Osaka_F2_R
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
 
 Osaka_F1_MSW
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
+interface range f0/...
+switchport mode trunk
+sw t a v ...
+switchport trunk native vlan ...
+channel-group ... mode ...
+no sh
 
-Osaka_F1_MSW
+Osaka_F2_MSW
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
+interface range f0/...
+switchport mode trunk
+sw t a v ...
+switchport trunk native vlan ...
+channel-group ... mode ...
+no sh
 
 Osaka_F1_SW1
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Osaka_F1_SW2
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Osaka_F1_SW3
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Osaka_F2_SW1
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Osaka_F2_SW2
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
 
 Osaka_F2_SW3
 ====================
+ena
+conf t
+no ip domain lookup
+banner motd "Authorized Users Only!"
+line con 0
+password ...
+login
+exit
+ena secret ...
+service password-encryption
+username Admin secret ...
+ip domain name GNC.jp
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 15
+pass ...
+transport input ssh
+exit
+ip default-gateway ...
+vlan 
+name 
+vlan 
+name 
+vlan 
+name Management
+vlan 
+name Native
