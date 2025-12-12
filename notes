@@ -1,1 +1,5 @@
+MSW <-->MSW:
+LACP
 
+MSW <--> SW:
+PAgP
