@@ -49,12 +49,9 @@ csinálni kell:
 -megnézni minden megvan e(kkk)
 -ipv6 kitalálás
 -nat
--eigrp
--wan
--2 rétegbeli redundancia
--soho router kicserélése(gavallér)
 -glbp
 -portguard
+- ssh
 -dokumentáció: további fejleztés
   -eszközleírás op rendszer minden eszközön pl
   -
