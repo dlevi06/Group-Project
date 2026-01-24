@@ -8,6 +8,21 @@ PAgP
 IPv6:
 Osaka
 
+Vlan:
+IoT: vlan 60
+CEO: vlan 90
+Brach_Manager: vlan 90
+Management: 10
+Native: 99
+Instructor: vlan 70
+Students: vlan 80
+Office: vlan 40
+Admin: vlan 50
+DevOps: vlan 30
+Ai_clusters: vlan 20
+Core_servers: vlan 15
+Printers: vlan 45
+
 GNC – Global Neural Computing
 GNC – Generative Neural Core
 GNC – Guided Neural Cognition
