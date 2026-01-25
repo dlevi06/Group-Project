@@ -56,3 +56,136 @@ csinálni kell:
 -dokumentáció: további fejleztés
   -eszközleírás op rendszer minden eszközön pl
   -
+Ez egy nagyon logikus lépés! Mielőtt beizzítjuk a routereket (amik kivisznek a netre), stabilizálni kell a belső szolgáltatásokat, mert nélkülük a kliensek (PC-k) IP-t sem kapnak, és nem tudnak név alapján böngészni.
+
+Mivel **virtuális környezetet** szeretnél szimulálni (ami az iparban standard: VMware ESXi, Proxmox vagy Hyper-V fut a vason, és azon mennek a VM-ek), a Packet Tracerben ezt úgy modellezzük, hogy **két erős fizikai szervert** teszünk be, és logikailag szétosztjuk rajtuk a feladatokat operációs rendszer szerint.
+
+Itt a javasolt **Szerepkör-kiosztás (Server Roles)**, ami megfelel az ipari standardoknak ("Best Practice"):
+
+---
+
+### 1. Szerver: "Windows_Infra_VM" (A hálózat gerince)
+
+**OS:** Windows Server 2022 (szimulált)
+**IP:** `10.10.15.10` (Ez FONTOS! Ezt állítottuk be `ip helper-address`-nek a switcheken!)
+**Gateway:** `10.10.15.1`
+**DNS Server:** `127.0.0.1` (Saját maga)
+
+**Feladatai:**
+
+* **Active Directory (AAA):** Felhasználók kezelése (Admin, CEO, HR).
+* **DNS:** Névfeloldás (hogy a `gnc.jp` működjön).
+* **DHCP:** IP címek osztása minden VLAN-nak.
+* **Fájl és Nyomtató megosztás:** Központi adattárolás.
+
+### 2. Szerver: "Linux_App_VM" (Web és Automatizálás)
+
+**OS:** Ubuntu Server / RHEL (szimulált)
+**IP:** `10.10.15.11`
+**Gateway:** `10.10.15.1`
+**DNS Server:** `10.10.15.10` (A Windows szerver címe!)
+
+**Feladatai:**
+
+* **HTTP/HTTPS:** A belső weboldal (Intranet).
+* **Automatizált mentés (TFTP/FTP):** Ide mentik a switchek a configot.
+* **Szoftver telepítés:** FTP tárhely a telepítőknek.
+* **Syslog:** Naplózás (hogy lásd, ha valaki próbálkozik).
+
+---
+
+### Konfiguráció a Packet Tracerben (GUI)
+
+Kattints a szerverekre, és a **Services** fülön állítsd be ezeket:
+
+#### **A) Windows Szerver (10.10.15.10) Beállításai**
+
+**1. DHCP (A legkritikusabb!)**
+Mivel a switcheken beállítottuk az `ip helper`-t, itt kell létrehoznod a Pool-okat minden VLAN-hoz.
+
+* **Service:** ON
+* **Pool Name:** `VLAN_40_Office`
+* Default Gateway: `10.10.40.1`
+* DNS Server: `10.10.15.10`
+* Start IP: `10.10.40.10`
+* Subnet Mask: `255.255.255.0`
+* *Klikk: Add*
+
+
+* **Pool Name:** `VLAN_20_AI`
+* Default Gateway: `10.10.20.1`
+* DNS: `10.10.15.10`
+* Start IP: `10.10.20.10`
+* *Klikk: Add*
+
+
+* *(Ugyanígy a VLAN 30, 45, 50, 60, 90, 100-hoz is! A Gateway mindig az adott VLAN .1-es címe legyen!)*
+
+**2. DNS (Névfeloldás)**
+
+* **Service:** ON
+* **Resource Records:**
+* `Tokyo-Win.gnc.jp` -> `A Record` -> `10.10.15.10`
+* `Tokyo-Lin.gnc.jp` -> `A Record` -> `10.10.15.11`
+* `www.gnc.jp` -> `A Record` -> `10.10.15.11` (A weboldal a Linuxon lesz!)
+* `printer.gnc.jp` -> `A Record` -> `10.10.45.10` (Ha fix IP-t adsz a nyomtatónak)
+
+
+
+**3. AAA (Active Directory szimuláció)**
+
+* **Service:** ON
+* **Client Name:** `Tokyo_F1_MSW` (és a többi eszköz neve)
+* **Client IP:** `10.10.10.2` (Management IP-k)
+* **Secret:** `Cisco123` (Radius kulcs)
+* **Users:**
+* User: `ceo`, Pass: `Boss123`
+* User: `devops`, Pass: `Linux123`
+
+
+
+---
+
+#### **B) Linux Szerver (10.10.15.11) Beállításai**
+
+**1. HTTP/HTTPS (Webszerver)**
+
+* **Service:** ON (HTTP és HTTPS is)
+* Menj a `index.html`-re, kattints az **Edit**-re.
+* Írj bele valami menőt: `<h1>Welcome to GNC Tokyo AI Cluster - Intranet</h1>`
+
+**2. TFTP (Automatizált mentés)**
+
+* **Service:** ON
+* Ez azért kell, hogy a routerek/switchek ide tudják menteni a `running-config`-ot automatikusan (`copy running-config tftp`).
+
+**3. FTP (Fájlmegosztás és Szoftvertelepítés)**
+
+* **Service:** ON
+* Hozz létre egy usert:
+* User: `backup`, Pass: `backup`, Permissions: Read/Write/Delete/Rename/List
+* User: `deploy`, Pass: `install`, Permissions: Read/List (Csak olvasni tudják a telepítőket)
+
+
+
+**4. Syslog (Naplózás)**
+
+* **Service:** ON
+* Ha a switcheken beállítod a `logging host 10.10.15.11` parancsot, itt fog megjelenni minden hibaüzenet és esemény.
+
+---
+
+### Összegzés: Mit értünk el?
+
+1. **Redundancia:** Ha a Linux szerver meghal, a hálózat (DHCP/DNS/AD) még megy a Windowsról. Ha a Windows hal meg, a weboldal és a mentések még elérhetőek a Linuxon.
+2. **IP Helper működés:** Mivel a Windows szerver a `10.10.15.10`, és a DHCP Poolok be vannak állítva, amint a PC-ket "DHCP" módra állítod, **automatikusan kapnak IP-t**.
+3. **Realizmus:** Így épül fel egy igazi adatközpont is (Infrastructure Services vs. Application Services).
+
+Ha beállítottad őket, **ellenőrzésképpen**:
+Menj a `Tokyo_F1_PC1`-re (vagy bármelyik PC-re), tedd át DHCP-re.
+
+* Kapott IP-t? (pl. 10.10.30.x)
+* Látja a Gateway-t?
+* Be tudja tölteni a böngészőben a `www.gnc.jp`-t?
+
+Ha ez megvan, mehetünk a Routerekre!
