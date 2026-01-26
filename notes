@@ -12,7 +12,11 @@ Tokyo kell még:
 wirelsess net ssid stb
 szerver AD stb
 jelszavak
-nyomtatók
+jelszótábla: crypto isakmp key
+
+tokyo data:
+crypto isakmp key SzktwiVJ address 172.16.1.6
+
 
 Vlan:
 IoT: vlan 60
