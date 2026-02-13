@@ -2,6 +2,11 @@ VIzsga elmélest: szakma sztar
 MSW <-->MSW:
 LACP
 
+TO DO:
+G0/0/2-->S0/1/0
+G0/1/3-->G0/0/2
+Configcsere
+
 MSW <--> SW:
 PAgP
 
